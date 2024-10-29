@@ -1,0 +1,9 @@
+[ping] # Grupo ping
+192.168.0.19
+192.168.0.20
+192.168.0.21
+192.168.0.22
+
+[ping:vars] # Variaveis para o grupo ping
+ansible_user=root
+ansible_ssh_private_key_file=~/.ssh/aula_vagrant

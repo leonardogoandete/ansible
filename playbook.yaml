@@ -1,0 +1,17 @@
+---
+# Primeiro play
+- name: Intalação do nginx e configuração de uma pagina estatica
+  # No hosts pode ser o nome do grupo ou para todos `all`
+  hosts: all
+  # Lista de tarefas
+  tasks:
+      # nome da tarefa
+    - name: Instalar o NGINX
+      # Define o modulo a ser utilizado
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+    - name: Copiar o arquivo index.html
+      ansible.builtin.copy:
+        src: ./index.html
+        dest: /var/www/html/index.nginx-debian.html
