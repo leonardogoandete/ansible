@@ -1,17 +1,36 @@
 ---
-# Primeiro play
-- name: Intalação do nginx e configuração de uma pagina estatica
-  # No hosts pode ser o nome do grupo ou para todos `all`
+- name: Criação de um usuario
   hosts: all
-  # Lista de tarefas
+  remote_user: root
+  vars_files:
+    - vars.yaml
   tasks:
-      # nome da tarefa
-    - name: Instalar o NGINX
-      # Define o modulo a ser utilizado
+    - name: Instalar o pacote whois
       ansible.builtin.apt:
-        name: nginx
+        name: whois
         state: present
-    - name: Copiar o arquivo index.html
+        update_cache: true
+
+    - name: Gerar senha criptografada
+      ansible.builtin.shell: "mkpasswd --method=SHA-512 --rounds=4096 {{ senha }}"
+      register: senha_criptografada
+
+    - name: Criar o usuario
+      ansible.builtin.user:
+        name: "{{ nome }}"
+        password: "{{ senha_criptografada.stdout }}"
+        state: present
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+    - name: Criar o diretorio ssh 
+      ansible.builtin.file:
+        path: "/home/{{ nome }}/.ssh"
+        state: directory
+        owner: "{{ nome }}"
+        group: "{{ nome }}"
+        recurse: true
+    - name: Copiar a chave publica
       ansible.builtin.copy:
-        src: ./index.html
-        dest: /var/www/html/index.nginx-debian.html
+        src: "/home/leo/.ssh/aula_ansible.pub"
+        dest: "/home/{{ nome }}/.ssh/authorized_keys"

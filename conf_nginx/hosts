@@ -1,0 +1,9 @@
+[maquinas] # Grupo ansible
+10.253.179.58
+10.253.179.87
+10.253.179.228
+10.253.179.229
+
+[maquinas:vars] # Variaveis para o grupo ansible
+ansible_ssh_private_key_file=~/.ssh/aula_ansible
+ansible_user=root

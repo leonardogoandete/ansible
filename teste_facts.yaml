@@ -1,0 +1,11 @@
+---
+- name: Ver os dados de Facts
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Ver o processador
+      ansible.builtin.debug:
+        msg: "{{ ansible_processor }}"
+    - name: Ver o ip
+      ansible.builtin.debug:
+        msg: "{{ ansible_ens3.ipv4.address }}"

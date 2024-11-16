@@ -1,0 +1,9 @@
+- name: Resultado de um comando
+  hosts: all
+  tasks:
+    - name: Executar um comando
+      ansible.builtin.shell: ps
+      register: resultado
+    - name: Exibir o resultado
+      ansible.builtin.debug:
+        msg: "{{ resultado }}"

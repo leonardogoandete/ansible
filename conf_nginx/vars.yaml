@@ -1,0 +1,4 @@
+usuario: 
+  - leonardo
+senha: leonardo
+chave_publica: /home/leo/.ssh/aula_ansible.pub

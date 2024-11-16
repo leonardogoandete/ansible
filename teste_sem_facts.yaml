@@ -1,0 +1,8 @@
+---
+- name: Teste sem Facts
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Exibir uma mensagem
+      ansible.builtin.debug:
+        msg: "Olá Mundo"

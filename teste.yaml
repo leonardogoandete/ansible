@@ -1,0 +1,9 @@
+---
+- name: Exibindo variaveis
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Exibir variaveis
+      ansible.builtin.debug:
+        msg: "O nome é {{ nome }} e a idade é {{ idade }}"
